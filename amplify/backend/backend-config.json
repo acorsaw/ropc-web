@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"ropcweb64e0ac2f": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}
