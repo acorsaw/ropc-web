@@ -6,7 +6,7 @@
         "framework": "angular",
         "config": {
             "SourceDir": "src",
-            "DistributionDir": "dist",
+            "DistributionDir": "build",
             "BuildCommand": "npm.cmd run-script build",
             "StartCommand": "npm start"
         }
