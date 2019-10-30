@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -9,32 +9,20 @@ import awsconfig from './aws-exports'
 
 Amplify.configure(awsconfig)
 
-
-let email = null
-
-function signIn() {
-  Auth.federatedSignIn()
-}
-
-function checkUser() {
-  Auth.currentAuthenticatedUser()
-  .then(user => console.log({user}))
-  .catch(err => console.log(err))
-}
-
 function signOut() {
   Auth.signOut()
     .then(data => console.log(data))
     .catch(err => console.log(err))
 }
 
-function getUserEmail() {
-  Auth.currentUserInfo()
-    .then(user => console.log({user}))
-    .catch(err => console.log({err}))
-}
-
 function App() {
+
+  const [userData, setUserData] = useState({})
+
+  useEffect( () => {
+    Auth.currentAuthenticatedUser().then( user => setUserData(user))
+  })
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -42,6 +30,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <p>{userData.email}</p>
         <button onClick={signOut}>Sign Out</button>
       </header>
     </div>
