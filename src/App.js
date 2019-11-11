@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React from 'react'
 import { Router } from '@reach/router'
 import Home from 'ropc/Home'
 import Schedule from 'ropc/Schedule'
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="App">
       <h1>Global Wrapping Header</h1>
+
       <Router>
         <Home path='/'/>
         <Schedule path='/calendar'/>
