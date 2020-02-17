@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import {Calendar, Views, momentLocalizer} from 'react-big-calendar'
+import {Calendar as BigCalendar, Views, momentLocalizer} from 'react-big-calendar'
+import CreateEvent from 'ropc/components/CreateEvent'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-function Schedule() {
+import { withAuthenticator } from 'aws-amplify-react'
+import Amplify, {Auth} from 'aws-amplify'
+import awsconfig from 'aws-exports'
+
+Amplify.configure(awsconfig)
+
+function Calendar() {
 
     const [eventData, setEventData] = useState([])
+    const [eventModal, setEventModal] = useState(false)
+
+    const toggleModal = () => {
+        setEventModal(!eventModal)
+    }
 
     useEffect( () => {
         setEventData([{
             id:0,
             title: "The Event Title",
             allDay: false,
-            start: new Date(2019, 10, 10, 14, 0),
-            end: new Date(2019, 10, 10, 15, 0)
+            start: new Date(2020, 2, 16, 14, 0),
+            end: new Date(2020, 2, 16, 15, 0)
         }])
         //   Auth.currentAuthenticatedUser().then( user => setUserData(user))
     }, [])
@@ -32,15 +44,28 @@ function Schedule() {
         console.log("view:", view) // String, month, week, day
     }
 
+    const signOut = () => {
+        Auth.signOut({global: true})
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+    }
+
     const formats = {
         dayFormat: 'ddd'
     }
 
     const localizer = momentLocalizer(moment)
 
+    const handleSelect = (start, end, slots, action, bounds, box) => {
+        console.log("start:", start, "end:", end, "slots:", slots, "action:", action)
+        toggleModal()
+    }
+
     return (
         <div className='calendar-wrapper'>
-            <Calendar
+            <button onClick={signOut}>Sign Out</button>
+            <CreateEvent showModal={eventModal} toggle={toggleModal}/>
+            <BigCalendar
                 events={eventData}
                 formats={formats}
                 step={15}
@@ -51,10 +76,11 @@ function Schedule() {
                 selectable={true}
                 onNavigate={handleNavigate}
                 onView={handleViewChange}
+                onSelectSlot={handleSelect}
             />
             
         </div>
     )
 }
 
-export default Schedule
+export default withAuthenticator(Calendar)
