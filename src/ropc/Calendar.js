@@ -4,28 +4,23 @@ import CreateEvent from 'ropc/components/CreateEvent'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import { withAuthenticator } from 'aws-amplify-react'
-import Amplify, {Auth} from 'aws-amplify'
-import awsconfig from 'aws-exports'
-
-Amplify.configure(awsconfig)
+import MomentUtils from '@date-io/moment'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 
 function Calendar() {
 
     const [eventData, setEventData] = useState([])
-    const [eventModal, setEventModal] = useState(false)
-
-    const toggleModal = () => {
-        setEventModal(!eventModal)
-    }
+    const [showModal, setShowModal] = useState(false)
+    const [initialStart, setInitialStart] = useState(new Date())
+    const [initialEnd, setInitialEnd] = useState(new Date())
 
     useEffect( () => {
         setEventData([{
             id:0,
             title: "The Event Title",
             allDay: false,
-            start: new Date(2020, 2, 16, 14, 0),
-            end: new Date(2020, 2, 16, 15, 0)
+            start: new Date(2020, 1, 16, 14, 0),
+            end: new Date(2020, 1, 16, 15, 0)
         }])
         //   Auth.currentAuthenticatedUser().then( user => setUserData(user))
     }, [])
@@ -44,12 +39,6 @@ function Calendar() {
         console.log("view:", view) // String, month, week, day
     }
 
-    const signOut = () => {
-        Auth.signOut({global: true})
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-    }
-
     const formats = {
         dayFormat: 'ddd'
     }
@@ -58,29 +47,40 @@ function Calendar() {
 
     const handleSelect = (start, end, slots, action, bounds, box) => {
         console.log("start:", start, "end:", end, "slots:", slots, "action:", action)
-        toggleModal()
+        setInitialStart(start.start)
+        setInitialEnd(start.end)
+        setShowModal(true)
     }
 
     return (
         <div className='calendar-wrapper'>
-            <button onClick={signOut}>Sign Out</button>
-            <CreateEvent showModal={eventModal} toggle={toggleModal}/>
-            <BigCalendar
-                events={eventData}
-                formats={formats}
-                step={15}
-                timeslots={8}
-                localizer={localizer}
-                defaultView={Views.WEEK}
-                defaultDate={new Date()}
-                selectable={true}
-                onNavigate={handleNavigate}
-                onView={handleViewChange}
-                onSelectSlot={handleSelect}
-            />
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+
+                <CreateEvent 
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    initialStart={initialStart}
+                    initialEnd={initialEnd}
+                />
+
+                <BigCalendar
+                    events={eventData}
+                    formats={formats}
+                    step={15}
+                    timeslots={8}
+                    localizer={localizer}
+                    defaultView={Views.WEEK}
+                    defaultDate={new Date()}
+                    selectable={true}
+                    onNavigate={handleNavigate}
+                    onView={handleViewChange}
+                    onSelectSlot={handleSelect}
+                />
+
+            </MuiPickersUtilsProvider>
             
         </div>
     )
 }
 
-export default withAuthenticator(Calendar)
+export default Calendar

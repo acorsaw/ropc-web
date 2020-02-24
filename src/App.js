@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import React from 'react'
 import { Router } from '@reach/router'
 import { Link } from '@reach/router'
 import Home from 'ropc/Home'
 import Calendar from 'ropc/Calendar'
 import './App.css';
 
-import { withAuthenticator } from 'aws-amplify-react'
 import Amplify, {Auth} from 'aws-amplify'
 import awsconfig from 'aws-exports'
 
@@ -15,13 +13,13 @@ Amplify.configure(awsconfig)
 
 function App() {
 
-  // const signOut = () => {
-  //   Auth.signOut({global: true})
-  //     .then(data => console.log(data))
-  //     .catch(err => console.log(err))
-  // }
+  const signOut = () => {
+    Auth.signOut({global: true})
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+  }
 
-  // let [user, setUser] = useState({})
+  let [user, setUser] = useState({})
 
   // useEffect(() => {
   //   Auth.currentAuthenticatedUser({
@@ -35,13 +33,11 @@ function App() {
   //   })
   // },[])
 
-  
-
   return (
     <div className="App">
       <h1>Global Wrapping Header</h1>
-      {/* Current User: {user.attributes ? user.attributes.email : "Please Login"} */}
-      {/* <button onClick={signOut}>Log Out</button> */}
+      Current User: {user.attributes ? user.attributes.email : "Please Login"}
+      <button onClick={signOut}>Log Out</button>
       <Link to="/calendar">Show Calendar</Link>
       <Router>
         <Home path='/'/>
