@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { Router } from '@reach/router'
 import { Link } from '@reach/router'
 import Home from 'ropc/Home'
 import Calendar from 'ropc/Calendar'
+import About from 'ropc/About'
+import Education from 'ropc/Education'
 import './App.css';
+import { Container } from '@material-ui/core'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 
 import Amplify, {Auth} from 'aws-amplify'
 import awsconfig from 'aws-exports'
@@ -33,17 +38,25 @@ function App() {
   //   })
   // },[])
 
+  const [value, setValue] = useState(0)
+
   return (
-    <div className="App">
-      <h1>Global Wrapping Header</h1>
+    <Container maxWidth="lg">
+      <Tabs value={value} onChange={(e, val) => setValue(val)}>
+        <Tab label="Home" index={0} to="/" component={Link} />
+        <Tab label="About" index={1} to="/about" component={Link} />
+        <Tab label="Calendar" index={1} to="/calendar" component={Link} />
+        <Tab label="Education" index={3} to="/education" component={Link} />
+      </Tabs>
       Current User: {user.attributes ? user.attributes.email : "Please Login"}
       <button onClick={signOut}>Log Out</button>
-      <Link to="/calendar">Show Calendar</Link>
       <Router>
         <Home path='/'/>
+        <About path='/about'/>
         <Calendar path='/calendar'/>
+        <Education path='/education'/>
       </Router>
-    </div>
+    </Container>
   );
 }
 

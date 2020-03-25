@@ -228,3 +228,64 @@ UPDATE_COMPLETE                     ropc-web-test-20200310193301 AWS::CloudForma
 UPDATE_COMPLETE_CLEANUP_IN_PROGRESS ropc-web-test-20200310193301 AWS::CloudFormation::Stack Tue Mar 10 2020 19:43:40 GMT-0500 (Central Daylight Time)
 √ All resources are updated in the cloud
 ```
+
+Adding hosting for the React front end. In this case I specified Continuous 
+deployment, hooked it up to my Github project and initiated a deployment. Now
+after each push to master it will build my app and deploy it from my master
+branch.
+
+```
+adam@COBRA MINGW64 ~/ropc-web (master)
+$ amplify add hosting
+? Select the plugin module to execute Hosting with Amplify Console (Managed hosting with custom domains, Continuous deployment)
+? Choose a type Continuous deployment (Git-based deployments)
+? Continuous deployment is configured in the Amplify Console. Please hit enter once you connect your repository
+Amplify hosting urls:
+┌──────────────┬──────────────────────────────────────────────┐
+│ FrontEnd Env │ Domain                                       │
+├──────────────┼──────────────────────────────────────────────┤
+│ master       │ https://master.d3739sn8qs7trl.amplifyapp.com │
+└──────────────┴──────────────────────────────────────────────┘
+```
+
+Developing the UI
+I want to use Material UI for the presentation https://material-ui.com
+
+I started by adding a wrapper for the app in App.js
+
+```javascript
+<Container maxWidth="lg">
+
+</Container>
+```
+
+Then I added a tab navigation at the top, components for the top level content, and the Reach Router components to handle the routing
+
+```javascript
+import { Router } from '@reach/router'
+import { Link } from '@reach/router'
+
+import Home from 'ropc/Home'
+import Calendar from 'ropc/Calendar'
+import About from 'ropc/About'
+import Education from 'ropc/Education'
+
+import { Container } from '@material-ui/core'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+
+      <Tabs value={value} onChange={(e, val) => setValue(val)}>
+        <Tab label="Home" index={0} to="/" component={Link} />
+        <Tab label="About" index={1} to="/about" component={Link} />
+        <Tab label="Calendar" index={1} to="/calendar" component={Link} />
+        <Tab label="Education" index={3} to="/education" component={Link} />
+      </Tabs>
+      Current User: {user.attributes ? user.attributes.email : "Please Login"}
+      <button onClick={signOut}>Log Out</button>
+      <Router>
+        <Home path='/'/>
+        <About path='/about'/>
+        <Calendar path='/calendar'/>
+        <Education path='/education'/>
+      </Router>
+```
