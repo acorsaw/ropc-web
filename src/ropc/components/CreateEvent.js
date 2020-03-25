@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 // import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap'
-import { Modal } from '@material-ui/core';
+// import { Modal } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog'
 
 import CreateEventForm from 'ropc/components/CreateEventForm'
 
-import {useCreateEventHandler} from 'ropc/components/CreateEventHooks'
+// import {useCreateEventHandler} from 'ropc/components/CreateEventHooks'
 
 const CreateEvent = (props) => {
 
@@ -14,7 +14,7 @@ const CreateEvent = (props) => {
     initialStart,
     initialEnd,
     showModal,
-    setShowModal
+    hideModal
   } = props
 
 
@@ -22,12 +22,12 @@ const CreateEvent = (props) => {
     console.log("Create an event here:", e)
   }
 
-  const handleOpen = () => {
-    setShowModal(true)
-  }
+  // const handleOpen = () => {
+  //   setShowModal(true)
+  // }
 
   const handleClose = () => {
-    setShowModal(false)
+    hideModal()
   }
 
   return (

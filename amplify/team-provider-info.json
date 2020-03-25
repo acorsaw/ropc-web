@@ -1,20 +1,19 @@
 {
-    "local": {
+    "test": {
         "awscloudformation": {
-            "AuthRoleName": "ropc-web-local-20191026133707-authRole",
-            "UnauthRoleArn": "arn:aws:iam::458034212401:role/ropc-web-local-20191026133707-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::458034212401:role/ropc-web-local-20191026133707-authRole",
-            "Region": "us-east-2",
-            "DeploymentBucketName": "ropc-web-local-20191026133707-deployment",
-            "UnauthRoleName": "ropc-web-local-20191026133707-unauthRole",
-            "StackName": "ropc-web-local-20191026133707",
-            "StackId": "arn:aws:cloudformation:us-east-2:458034212401:stack/ropc-web-local-20191026133707/9cedb710-f81f-11e9-9da4-02c65bf75a14"
+            "AuthRoleName": "ropc-web-test-20200310193301-authRole",
+            "UnauthRoleArn": "arn:aws:iam::458034212401:role/ropc-web-test-20200310193301-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::458034212401:role/ropc-web-test-20200310193301-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "ropc-web-test-20200310193301-deployment",
+            "UnauthRoleName": "ropc-web-test-20200310193301-unauthRole",
+            "StackName": "ropc-web-test-20200310193301",
+            "StackId": "arn:aws:cloudformation:us-east-1:458034212401:stack/ropc-web-test-20200310193301/dd17d200-632f-11ea-a5c4-12eeb59f3ad1",
+            "AmplifyAppId": "d3739sn8qs7trl"
         },
         "categories": {
             "auth": {
-                "ropcweb64e0ac2f": {
-                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"1032227651519-e2c4uantc6vk7u9i7inqkb13t5fm0va1.apps.googleusercontent.com\",\"client_secret\":\"1z7U3DCOFxk37Vlsge3NrUq-\"}]"
-                }
+                "ropcwebc44edae6": {}
             }
         }
     }

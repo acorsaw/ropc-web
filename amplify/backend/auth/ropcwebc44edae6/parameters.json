@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "ropcweb64e0ac2f_identitypool_64e0ac2f",
+    "identityPoolName": "ropcwebc44edae6_identitypool_c44edae6",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ropcwe64e0ac2f",
-    "userPoolName": "ropcweb64e0ac2f_userpool_64e0ac2f",
+    "resourceNameTruncated": "ropcwec44edae6",
+    "userPoolName": "ropcwebc44edae6_userpool_c44edae6",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "ropcwe64e0ac2f_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ropcwec44edae6_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "ropcweb64e0ac2f",
+    "resourceName": "ropcwebc44edae6",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -44,18 +44,6 @@
             "Arn"
         ]
     },
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
-    "triggers": "{}",
-    "hostedUIDomainName": "ropc",
-    "authProvidersUserPool": [
-        "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "permissions": [],
+    "useDefault": "default",
     "dependsOn": []
 }

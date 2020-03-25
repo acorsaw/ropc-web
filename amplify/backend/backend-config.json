@@ -1,15 +1,9 @@
 {
 	"auth": {
-		"ropcweb64e0ac2f": {
+		"ropcwebc44edae6": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
-		}
-	},
-	"hosting": {
-		"S3AndCloudFront": {
-			"service": "S3AndCloudFront",
-			"providerPlugin": "awscloudformation"
 		}
 	}
 }
